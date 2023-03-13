@@ -1,0 +1,7 @@
+/node_modules
+/storage/logs 
+/storage/framework/cache
+/vendor
+/.idea
+/.vagrant
+.env
