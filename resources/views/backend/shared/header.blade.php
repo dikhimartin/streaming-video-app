@@ -38,45 +38,6 @@
                 <!-- This is  -->
                 <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                 <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-
-                <!-- notifications -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-message"></i>
-                        <div class="notify"> 
-                            <span class="heartbit"></span> <span class="point"></span> 
-                        </div>
-                    </a>
-                    <div class="dropdown-menu mailbox animated slideInUp">
-                        <ul>
-                            <li>
-                                <div class="drop-title">Notifications</div>
-                            </li>
-                            <li>
-                                <div class="message-center">
-                                    <!-- Message -->
-                                    <a href="/">
-                                        <div class="mail-contnet">
-                                         <h5>Out of Stock</h5> 
-                                            <span class="mail-desc">Romano Force Anti..</span> 
-                                            <span class="time">9:30 AM</span> 
-                                        </div>
-                                    </a>
-                                    <a href="/">
-                                        <div class="mail-contnet">
-                                         <h5>Incoming Goods</h5> 
-                                            <span class="mail-desc">Romano Force Anti..</span> 
-                                            <span class="time">9:30 AM</span> 
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="nav-link text-center" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
             </ul>
 
             <ul class="navbar-nav my-lg-0">
