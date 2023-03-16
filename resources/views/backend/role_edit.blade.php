@@ -20,7 +20,6 @@
             }
         </style>
     @endsection
-
     <!-- Bread crumb and right sidebar toggle -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
@@ -28,13 +27,11 @@
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'dashboard' )) }}">{{ __('main.dashboard') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'admin/dashboard' )) }}">{{ __('main.dashboard') }}</a></li>
                 <li class="breadcrumb-item active">{!! $pages_title !!}</li>
             </ol>
         </div>
     </div>
-    <!-- End Bread crumb and right sidebar toggle -->
-        
     <div class="container-fluid">
         <div class="row ">
             <div class="loading" style="display: none;">Loading&#8230;</div>

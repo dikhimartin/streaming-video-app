@@ -8,12 +8,11 @@
         </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'dashboard' )) }}">{{ __('main.dashboard') }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'admin/dashboard' )) }}">{{ __('main.dashboard') }}</a></li>
                 <li class="breadcrumb-item active">{!! $pages_title !!}</li>
             </ol>
         </div>
     </div>
-    <!-- End Bread crumb and right sidebar toggle -->
 
     <!-- Container fluid  -->
     <div class="container-fluid">
@@ -202,8 +201,6 @@
 
         </div>
     </div>
-    <!-- End Container fluid  -->
-
 
     <!-- Form Modal -->
     <div class="modal fade col-md-12" id="modal_show_role" role="dialog" data-backdrop="static" data-keyboard="false">
@@ -285,21 +282,10 @@
         </form>
       </div>
     </div>
-
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+   
     <script src="{{ URL::asset('admin_assets/assets/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-  
-    <!-- ============================================================== -->
-    <!-- Plugins for this page -->
-    <!-- ============================================================== -->
-    <!-- Plugin JavaScript -->
     <script src="{{ URL::asset('admin_assets/assets/plugins/moment/moment.js') }}"></script>
     <script src="{{ URL::asset('admin_assets/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
-
-    <!-- Date Picker Plugin JavaScript -->
     <script src="{{ URL::asset('admin_assets/assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script type="text/javascript">
         $('#date_birth').bootstrapMaterialDatePicker({ weekStart: 0, time: false });
@@ -317,7 +303,6 @@
             todayHighlight: true
         });
     </script>
-
 @endsection
 @push('js')
     <script type="text/javascript">

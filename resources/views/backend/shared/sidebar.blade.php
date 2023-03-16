@@ -1,7 +1,6 @@
 <?php 
     $user = Auth::user();
 ?>
-
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar">
@@ -14,7 +13,6 @@
                     <span class="point"></span> 
                 </div>
             </div>
-
             <!-- User profile text-->
             <div class="profile-text"> 
                 <h5>{{ $user->name }}</h5>
@@ -42,17 +40,13 @@
                 </div>
             </div>
         </div>
-        <!-- End User profile text-->
-
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                  <li class="nav-devider"></li>
-
                 <li class="hover {!! trim($__env->yieldContent('sidebarActive')) == 'bank' ? ' active' : '' !!}">
                     <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'admin/dashboard' ))}}" class="waves-effect" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">{{ __('main.dashboard') }}</span></a>
                 </li>
-
                 <!--SETTING MODUL-->
                 @if ($user->can('users-list') || $user->can('roles-list') || $user->can('group_user-list') )
                     <li>
@@ -101,8 +95,5 @@
                  
             </ul>
         </nav>
-        <!-- End Sidebar navigation -->
-
     </div>
-    <!-- End Sidebar scroll-->
 </aside>

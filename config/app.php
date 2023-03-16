@@ -78,7 +78,7 @@ return [
     */
 
     'locale' => 'id',
-    'locales' => ['en' => 'English', 'id' => 'Indonesia', 'zh' => 'China'],
+    'locales' => ['en' => 'English', 'id' => 'Indonesia'],
 
     /*
     |--------------------------------------------------------------------------
@@ -91,7 +91,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -175,25 +175,17 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-                Intervention\Image\ImageServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
         //entrust
         Zizaco\Entrust\EntrustServiceProvider::class,
-
         // Colective html
         Collective\Html\HtmlServiceProvider::class,
-
         // Mcmara translation
-         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
-         PeterColes\Countries\CountriesServiceProvider::class,
-
-         // Full Calended
-         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-
-         Intervention\Image\ImageServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        PeterColes\Countries\CountriesServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -242,24 +234,18 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
         //entrust
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-
         // Colective HTML
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
-        // Macmara translation
+         // Macmara translation
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Countries' => PeterColes\Countries\CountriesFacade::class,
-
         // Datatables
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         
-        // Full Calender
-        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'Image' => Intervention\Image\Facades\Image::class,
     ],
 
