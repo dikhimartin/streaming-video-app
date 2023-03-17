@@ -47,6 +47,7 @@
                                                         <label>{{__('main.search_by')}}</label>
                                                         <select name="field_filter" class="form-control">
                                                             <option value="title" {{ $field_filter == 'title' ? "selected" : "" }}>{{__('main.title')}}</option>
+                                                            <option value="original_file_name" {{ $field_filter == 'original_file_name' ? "selected" : "" }}>{{__('main.file_name')}}</option>
                                                             <option value="description" {{ $field_filter == 'description' ? "selected" : "" }}>{{__('main.description')}}</option>
                                                         </select>
                                                     </div>
@@ -97,21 +98,20 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="button-group">
-                                    @permission('multimedia-create')
-                                    <a href="javascript:void(0)">
-                                         <button onclick="add()" class="btn btn-info btn-sm waves-light" type="button" data-toggle="tooltip" data-placement="top" title="{{__('main.add_new')}}"><span class="btn-label"><i class="fa fa-plus"></i></span>&nbsp;{{__('main.add_new')}}
-                                         </button>
-                                    </a>
-                                    @endpermission
-
-                                    @permission('multimedia-delete')
-                                    <a href="javascript:void(0)">
-                                        <button id="btn-hps-semua" onclick="removed_all_data()" class="btn btn-danger btn-sm waves-light" type="button" data-toggle="tooltip" data-placement="top" title="{{__('main.delete_all')}}"><span class="btn-label"><i class="fa fa-trash"></i>
-                                            </span>&nbsp;{{__('main.delete_all')}}
+                                @permission('multimedia-create')
+                                <a href="javascript:void(0)">
+                                        <button onclick="add()" class="btn btn-info btn-sm waves-light" type="button" data-toggle="tooltip" data-placement="top" title="{{__('main.add_new')}}"><span class="btn-label"><i class="fa fa-plus"></i></span>&nbsp;{{__('main.add_new')}}
                                         </button>
-                                    </a>
-                                    @endpermission
+                                </a>
+                                @endpermission
 
+                                @permission('multimedia-delete')
+                                <a href="javascript:void(0)">
+                                    <button id="btn-hps-semua" onclick="removed_all_data()" class="btn btn-danger btn-sm waves-light" type="button" data-toggle="tooltip" data-placement="top" title="{{__('main.delete_all')}}"><span class="btn-label"><i class="fa fa-trash"></i>
+                                        </span>&nbsp;{{__('main.delete_all')}}
+                                    </button>
+                                </a>
+                                @endpermission
                             </div>
                         </div>
                     </div>
@@ -397,7 +397,6 @@
             $('.help-block').empty(); // clear error string
             $('#modal_form').modal('show'); // show bootstrap modal
             $('.modal-title').text('{{ __("main.add") }} {!! $pages_title !!}');
-            // Set Title to Bootstrap modal title
         }
 
         function edited(id){
@@ -576,10 +575,13 @@
                             if (jQuery(this).is(":checked")) {
                                 var id = this.id;
                                 var splitid = id.split('_');
-                                var postid = splitid[1];
-                                post_arr.push(postid);
+                                if(splitid != ''){
+                                    var postid = splitid[1];
+                                    post_arr.push(postid);
+                                }
                             }
                         });
+
 
                         if(post_arr.length > 0){
                             var url ="/admin/multimedia/deleted_all/"+post_arr;

@@ -267,20 +267,29 @@ class MultimediaController extends Controller
         echo json_encode($result);
     }
 
-    public function delete_all($id){
+    public function delete_all(Request $request){
         if (!Auth::user()->can($this->controller.'-delete')){
             echo json_encode("error_403");
         }
-
-        DB::table("multimedia")->whereIn('id',explode(",",$id))->delete();
-
+    
+        $ids = $request->input('id');
+        $multimedia = Multimedia::whereIn('id', $ids)->get();
+    
+        foreach ($multimedia as $file) {
+            if (File::exists(public_path($file->relative_path))) {
+                File::delete(public_path($file->relative_path));
+            }
+        }
+    
+        Multimedia::whereIn('id', $ids)->delete();
+    
         $result=array(
-                "data_post"=>array(
-                    "status"=>TRUE,
-                    "class" => "danger",
-                    "message"=> __('main.data_succesfully_deleted')
-                )
-            );
+            "data_post"=>array(
+                "status"=>TRUE,
+                "class" => "danger",
+                "message"=> __('main.data_succesfully_deleted')
+            )
+        );
         echo json_encode($result);
     }
 

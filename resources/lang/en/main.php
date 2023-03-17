@@ -61,6 +61,7 @@ return [
     'title' => 'Title',
     'upload_file' => 'Upload File',
     'size' => 'Size',
+    'file_name' => 'File Name',
 
     // => SETTING
     // Users
