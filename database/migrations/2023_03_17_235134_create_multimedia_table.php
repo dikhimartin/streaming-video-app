@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAssetsTable extends Migration
+class CreateMultimediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAssetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('assets', function (Blueprint $table) {
+        Schema::create('multimedia', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
             $table->string('file_name');
@@ -22,7 +22,7 @@ class CreateAssetsTable extends Migration
             $table->string('absolute_path');
             $table->string('relative_path');
             $table->longText('description')->nullable();
-            $table->integer('status');
+            $table->enum('status', ['Y', 'N'])->nullable()->default('Y');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateAssetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assets');
+        Schema::dropIfExists('multimedia');
     }
 }

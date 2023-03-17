@@ -10,6 +10,27 @@ Route::group(array('prefix' => LaravelLocalization::setLocale() . '/admin', 'nam
 
 	Route::get('/dashboard', 'HomeController@index')->name('home');
 
+
+	/*
+	 |--------------------------------------------------------------------------
+	 | MODUL MULTIMEDIA
+	 |--------------------------------------------------------------------------
+	*/
+	Route::get('multimedia',
+	[
+		'as'=>'multimedia.index',
+		'uses'=>'MultimediaController@index',
+	]);
+	Route::get('/get_multimedia_data','MultimediaController@get_group_user_data');
+	Route::get('/get_multimedia_data_byid','MultimediaController@get_group_user_data_byid');
+	Route::post('/multimedia/save','MultimediaController@save');
+	Route::post('/multimedia/update','MultimediaController@update');
+	Route::post('/multimedia/change_status_active/{id}','MultimediaController@change_status_active');
+	Route::post('/multimedia/change_status_inactive/{id}','MultimediaController@change_status_inactive');
+	Route::post('/multimedia/deleted_all/{id}','MultimediaController@delete_all');
+	Route::post('/multimedia/deleted','MultimediaController@delete');
+
+
 	/*
 	 |--------------------------------------------------------------------------
 	 | MODUL SETTING

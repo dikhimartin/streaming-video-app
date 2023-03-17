@@ -43,10 +43,19 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                 <li class="nav-devider"></li>
+                <li class="nav-devider"></li>
                 <li class="hover {!! trim($__env->yieldContent('sidebarActive')) == 'bank' ? ' active' : '' !!}">
                     <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'admin/dashboard' ))}}" class="waves-effect" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">{{ __('main.dashboard') }}</span></a>
                 </li>
+                <!--MULTIMEDIA MODUL-->
+                @if ($user->can('multimedia-list') )
+                    <li class="hover {!! trim($__env->yieldContent('sidebarActive')) == 'bank' ? ' active' : '' !!}">
+                        <a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'admin/multimedia' ))}}" class="waves-effect" href="javascript:void(0)" aria-expanded="false">
+                            <i class="mdi mdi-play"></i><span class="hide-menu">{{ __('main.multimedia') }}</span>
+                        </a>
+                    </li>
+                @endif
+
                 <!--SETTING MODUL-->
                 @if ($user->can('users-list') || $user->can('roles-list') || $user->can('group_user-list') )
                     <li>
@@ -92,7 +101,6 @@
                         </ul>
                     </li>
                 @endif
-                 
             </ul>
         </nav>
     </div>

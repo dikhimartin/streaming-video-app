@@ -1,7 +1,9 @@
 @extends('layouts.backend.app')
 @section('sidebarActive', $controller)
 
+
 @section('content')
+    <link href="{{ URL::asset('admin_assets/assets/plugins/dropify/dist/css/dropify.min.css') }}" rel="stylesheet" />
     <style type="text/css">
         table , td, th {
             border: 1px solid #595959;
@@ -16,7 +18,6 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ LaravelLocalization::getLocalizedURL(LaravelLocalization::getCurrentLocale(),URL::to( 'dashboard' )) }}">{{ __('main.dashboard') }}</a></li>
-                <li class="breadcrumb-item"><a href="#">{{ __('main.setting') }}</a></li>
                 <li class="breadcrumb-item active">{!! $pages_title !!}</li>
             </ol>
         </div>
@@ -45,7 +46,7 @@
                                                     <div class="form-group">
                                                         <label>{{__('main.search_by')}}</label>
                                                         <select name="field_filter" class="form-control">
-                                                            <option value="name_group" {{ $field_filter == 'name_group' ? "selected" : "" }}>{{__('main.name_group')}}</option>
+                                                            <option value="title" {{ $field_filter == 'title' ? "selected" : "" }}>{{__('main.title')}}</option>
                                                             <option value="description" {{ $field_filter == 'description' ? "selected" : "" }}>{{__('main.description')}}</option>
                                                         </select>
                                                     </div>
@@ -96,14 +97,14 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="button-group">
-                                    @permission('group_user-create')
+                                    @permission('multimedia-create')
                                     <a href="javascript:void(0)">
                                          <button onclick="add()" class="btn btn-info btn-sm waves-light" type="button" data-toggle="tooltip" data-placement="top" title="{{__('main.add_new')}}"><span class="btn-label"><i class="fa fa-plus"></i></span>&nbsp;{{__('main.add_new')}}
                                          </button>
                                     </a>
                                     @endpermission
 
-                                    @permission('group_user-delete')
+                                    @permission('multimedia-delete')
                                     <a href="javascript:void(0)">
                                         <button id="btn-hps-semua" onclick="removed_all_data()" class="btn btn-danger btn-sm waves-light" type="button" data-toggle="tooltip" data-placement="top" title="{{__('main.delete_all')}}"><span class="btn-label"><i class="fa fa-trash"></i>
                                             </span>&nbsp;{{__('main.delete_all')}}
@@ -131,7 +132,7 @@
                                         </label>
                                     </td>
                                     <td>No.</th>
-                                    <td>{{__('main.name_group')}}</td>
+                                    <td>{{__('main.title')}}</td>
                                     <td>{{__('main.description')}}</td>
                                     <td>{{__('main.status')}}</td>
                                     <td>{{__('main.action')}}</td>
@@ -153,23 +154,23 @@
                                         </td>
                                         <td width="10">{!! $no !!}
                                         </td>
-                                        <td>{{$value->name_group}}</td>
+                                        <td>{{$value->title}}</td>
                                         <td>{{$value->description}}</td>
                                         <td>
                                         <div class="switch">
                                             <label>
-                                                <input onclick="status_change(this.checked, {{$value->id}})" name="status_change" type="checkbox"{{$value->status == 'Y' ? "checked" : "" }}><span class="lever switch-col-blue" value="Y"></span>
+                                                <input onclick="status_change(this.checked, `{{$value->id}}`)" name="status_change" type="checkbox"{{$value->status == 'Y' ? "checked" : "" }}><span class="lever switch-col-blue" value="Y"></span>
                                             </label>
                                         </div>
                                         </td>
                                         <td>
                                             <div class="hidden-sm hidden-sm action-buttons center">
-                                                @permission('group_user-edit')
-                                                    <a href="javascript:void(0)"> <a href="javascript:void(0)" onclick="edited({{$value->id}})" class="btn waves-effect waves-light btn-rounded btn-sm btn-info"data-toggle="tooltip" data-placement="top" title="{{__('main.edit')}}"><i class="fa fa-pencil"></i>
+                                                @permission('multimedia-edit')
+                                                    <a href="javascript:void(0)"> <a href="javascript:void(0)" onclick="edited(`{{$value->id}}`)" class="btn waves-effect waves-light btn-rounded btn-sm btn-info"data-toggle="tooltip" data-placement="top" title="{{__('main.edit')}}"><i class="fa fa-pencil"></i>
                                                     </a>
                                                 @endpermission
-                                                @permission('group_user-delete')
-                                                    <a href="javascript:void(0)"> <a href="javascript:void(0)" onclick="removed({{$value->id}})" class="btn waves-effect waves-light btn-rounded btn-sm btn-danger"data-toggle="tooltip" data-placement="top" title="{{__('main.delete')}}"><i class="fa fa-trash"></i>
+                                                @permission('multimedia-delete')
+                                                    <a href="javascript:void(0)"> <a href="javascript:void(0)" onclick="removed(`{{$value->id}}`)" class="btn waves-effect waves-light btn-rounded btn-sm btn-danger"data-toggle="tooltip" data-placement="top" title="{{__('main.delete')}}"><i class="fa fa-trash"></i>
                                                     </a>
                                                 @endpermission
                                             </div>
@@ -199,7 +200,7 @@
     <!-- Form Modal -->
     <div class="modal fade col-md-12" id="modal_form" role="dialog" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog modal-lg">
-        <form class="form-horizontal" method="post" id="form_group_user" enctype="multipart/form-data">
+        <form class="form-horizontal" method="post" id="form_group_multimedia" enctype="multipart/form-data">
           {{ csrf_field() }}
           <!-- Modal content-->
           <div class="modal-content">
@@ -219,11 +220,21 @@
 
                                     <input type="hidden" value="" name="id" id="id" />
 
-                                    <!--nama_group-->
+                                    <!--title-->
                                     <div class="form-group">
-                                       <label class="control-label col-md-5">{{ __('main.name_group') }} <span class="required">*</span></label>
+                                       <label class="control-label col-md-5">{{ __('main.title') }} <span class="required">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="name_group" name="name_group" required="" placeholder="{{__('main.name_group')}}" class="form-control">
+                                            <input type="title" name="title" required="" placeholder="{{__('main.title')}}" class="form-control">
+                                             <small class="form-control-feedback"></small>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- upload file -->
+                                    <div class="form-group">
+                                       <label class="control-label col-md-5">{{ __('main.upload_file') }}</label>
+                                        <div class="col-md-9">
+                                             <input type="file" name="file" class="dropify" data-max-file-size="10M" />
+                                             <p id="file"></p>
                                              <small class="form-control-feedback"></small>
                                         </div>
                                     </div>
@@ -263,7 +274,6 @@
                     <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal"><i class="fa fa-reply">&nbsp;</i>{{__('main.cancel')}}</button>  
                 </div>
             </div>
-
           </div>
         </form>
       </div>
@@ -271,7 +281,10 @@
 @endsection
 
 @push('js')
+    <script src="{{ URL::asset('admin_assets/assets/plugins/dropify/dist/js/dropify.min.js') }}"></script>
     <script type="text/javascript">
+        $('.dropify').dropify();
+
         $(".btn-reload").on("click", function () {
             $(".loading").show("fast");
         });     
@@ -296,7 +309,7 @@
             url = "";
             if(source == true){
                 $.ajax({
-                    url : "/admin/group_user/change_status_active/"+id,
+                    url : "/admin/multimedia/change_status_active/"+id,
                     type: "POST",
                     data: {"id":id},
                     contentType: false,
@@ -331,7 +344,7 @@
                 });
             }else{
                 $.ajax({
-                    url : "/admin/group_user/change_status_inactive/"+id,
+                    url : "/admin/multimedia/change_status_inactive/"+id,
                     type: "POST",
                     data: {"id":id},
                     contentType: false,
@@ -371,7 +384,7 @@
         function add(){
             // document.getElementById("btnSave").disabled = true;
             save_method = 'add';
-            $('#form_group_user')[0].reset(); // reset form on modals
+            $('#form_group_multimedia')[0].reset(); // reset form on modals
             $('.form-group').removeClass('has-danger'); // clear error class
             $('.help-block').empty(); // clear error string
             $('#modal_form').modal('show'); // show bootstrap modal
@@ -381,32 +394,31 @@
 
         function edited(id){
             save_method = 'update';
-            $('#form_group_user')[0].reset(); // reset form on modals
+            $('#form_group_multimedia')[0].reset(); // reset form on modals
             $('.form-group').removeClass('has-danger'); // clear error class
             $('.help-block').empty(); // clear error string
 
             //Ajax Load data from ajax
             $.ajax({
-                url : "{{ url('admin/get_group_user_data_byid') }}",
+                url : "{{ url('admin/get_multimedia_data_byid') }}",
                 type: "GET",
                 dataType: "JSON",
                 data: {"id":id},
                 success: function(result)
                 {
 
-                    $('[name="id"]').val(result.data_divisi.id);
-                    $('[name="name_group"]').val(result.data_divisi.name_group);
-                    $('[name="description"]').val(result.data_divisi.description);
-
-                    var status =result.data_divisi.status;
+                    $('[name="id"]').val(result.data_multimedia.id);
+                    $('[name="title"]').val(result.data_multimedia.title);
+                    $('[name="description"]').val(result.data_multimedia.description);
+                    var status =result.data_multimedia.status;
                     if(status == 'Y'){
                         $('#status').find(':radio[name=status][value="Y"]').prop('checked', true);
                     }else{
                         $('#status').find(':radio[name=status][value="N"]').prop('checked', true);
                     }
-
+                    $("#file").text(result.data_multimedia.absolute_path);
+                    
                     $('#modal_form').modal('show');
-
                     $('.modal-title').text('{{ __("main.edit") }} {!! $pages_title !!}');
 
                 },
@@ -423,14 +435,14 @@
             var url;
 
             if(save_method == 'add') {
-                url ="{{url('admin/group_user/save')}}";
+                url ="{{url('admin/multimedia/save')}}";
                 $('#btnSave').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Saving ...'); //change button text
             } else {
-                url ="{{url('admin/group_user/update')}}";
+                url ="{{url('admin/multimedia/update')}}";
                 $('#btnSave').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Updated ...'); //change button text
             }
             // ajax adding data to database
-            var formData = new FormData($('#form_group_user')[0]);
+            var formData = new FormData($('#form_group_multimedia')[0]);
 
             $.ajax({
                 url : url,
@@ -494,7 +506,7 @@
                 },
                  function(isConfirm){
                    if (isConfirm) {
-                    var url ="{{url('admin/group_user/deleted')}}";
+                    var url ="{{url('admin/multimedia/deleted')}}";
                     $.ajax({
                         url : url,
                         type: "POST",
@@ -561,7 +573,7 @@
                         });
 
                         if(post_arr.length > 0){
-                            var url ="/admin/group_user/deleted_all/"+post_arr;
+                            var url ="/admin/multimedia/deleted_all/"+post_arr;
 
                             // AJAX Request
                             $.ajax({

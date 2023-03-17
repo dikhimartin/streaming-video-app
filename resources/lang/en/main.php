@@ -56,6 +56,10 @@ return [
     'dont_have_permission_to_access_on_this_server' => "YOU DON'T HAVE PERMISSION TO ACCESS ON THIS SERVER.",
     'back_to_home' => 'Back To Home',
 
+    // => MULTIMEDIA
+    'multimedia' => 'Multimedia',
+    'title' => 'Title',
+    'upload_file' => 'Upload File',
 
     // => SETTING
     // Users

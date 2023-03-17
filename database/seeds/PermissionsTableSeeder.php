@@ -120,7 +120,43 @@ class PermissionsTableSeeder extends Seeder
                 'sort' => 1,
                 'created_at' => '2023-03-17 14:24:23',
                 'updated_at' => '2023-03-17 14:24:23'
-            ]
+            ],
+            [
+                'id' => 13,
+                'name' => 'multimedia-list',
+                'display_name' => 'Multimedia List',
+                'description' => 'Multimedia List',
+                'sort' => 1,
+                'created_at' => '2023-03-17 14:24:23',
+                'updated_at' => '2023-03-17 14:24:23'
+            ],
+            [
+                'id' => 14,
+                'name' => 'multimedia-create',
+                'display_name' => 'Multimedia Create',
+                'description' => 'Multimedia Create',
+                'sort' => 1,
+                'created_at' => '2023-03-17 14:24:23',
+                'updated_at' => '2023-03-17 14:24:23'
+            ],
+            [
+                'id' => 15,
+                'name' => 'multimedia-edit',
+                'display_name' => 'Multimedia Edit',
+                'description' => 'Multimedia Edit',
+                'sort' => 1,
+                'created_at' => '2023-03-17 14:24:23',
+                'updated_at' => '2023-03-17 14:24:23'
+            ],
+            [
+                'id' => 16,
+                'name' => 'multimedia-delete',
+                'display_name' => 'Multimedia Delete',
+                'description' => 'Multimedia Delete',
+                'sort' => 1,
+                'created_at' => '2023-03-17 14:24:23',
+                'updated_at' => '2023-03-17 14:24:23'
+            ],
         ]);
     }
 }

@@ -4,17 +4,13 @@ namespace App;
 
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
-class Asset extends Model
+class Multimedia extends Model
 {
     Use Uuid;
 
-    protected $table = 'assets';
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'multimedia';
     protected $fillable = [
         'title', 'file_name','file_size','original_file_name','absolute_path','relative_path','description','status'
     ];
@@ -22,4 +18,11 @@ class Asset extends Model
     public $incrementing = false;
 
     protected $keyType = 'uuid';
+
+    public function get_data(){
+    	$data = DB::table('multimedia')
+        ->select('multimedia.*')
+        ->orderBy('id','ASC');
+        return $data;
+    }
 }
