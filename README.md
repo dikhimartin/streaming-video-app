@@ -64,13 +64,21 @@ Lorem ipsum dolor sit amet.....
 
 - Inisialisasi Database
 
-  ```shell
-  php artisan migrate
-  ```
+  - SQL
 
-  ```shell
-  php artisan db:seed
-  ```
+    ```sql
+    CREATE DATABASE db_streaming_video_app;
+    ```
+
+  - Terminal
+
+    ```shell
+    php artisan migrate
+    ```
+
+    ```shell
+    php artisan db:seed
+    ```
 
 - Menjalankan Aplikasi
 
@@ -78,7 +86,10 @@ Lorem ipsum dolor sit amet.....
   php artisan serve
   ```
 
-
+- Laravel development server started: <http://127.0.0.1:8000>
+- Akses Login 
+  - Username : superadmin
+  - Password  : superadmin
 
 ------
 
