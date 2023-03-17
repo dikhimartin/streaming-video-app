@@ -19,6 +19,7 @@ class CreateMultimediaTable extends Migration
             $table->string('file_name');
             $table->integer('file_size');
             $table->string('original_file_name');
+            $table->string('path');
             $table->string('absolute_path');
             $table->string('relative_path');
             $table->longText('description')->nullable();

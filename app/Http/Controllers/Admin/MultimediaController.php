@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+
+use App\Traits\RespondsWithHttpStatus;
 use App\Multimedia;
 use App\User;
 use DB;
@@ -82,87 +85,113 @@ class MultimediaController extends Controller
     }
 
     public function save(Request $request){
-        if (!Auth::user()->can($this->controller.'-create')){
-            return  json_encode("error_403");
+        // Check user permissions
+        if (!Auth::user()->can($this->controller . '-create')) {
+            return json_encode("error_403");
         }
-
+    
+        // Validate request data
         MultimediaController::_validate_data($request);
-
+    
+        // Create a new multimedia object
         $data = new Multimedia();
+    
+        // Handle file upload
         if ($request->file('file')) {
-            $file = $request->file('file');
-            $original_file_name = $file->getClientOriginalName();
-            $file_ext = $file->getClientOriginalExtension();
-            $file_size = $file->getSize();
-            $filename = 'P-'.time().'-'.Str::random(10) . '.' . $file_ext;
-            
+            $video = $request->file('file');
+            $original_file_name = $video->getClientOriginalName();
+            $file_ext = $video->getClientOriginalExtension();
+            $file_size = $video->getSize();
+            $filename = 'P-' . time() . '-' . Str::random(10) . '.' . $file_ext;
+    
+            // Generate a UUID to use in the file path
+            $sub = Str::uuid();
+    
+            // Build the full path to the directory where the file will be stored
             $path = env("ROOT_PATH", "multimedia");
-            $destination_path = './'. $path .'/';
-            $relative_path = $path.'/'.$filename;
-            $absolute_path = env("APP_URL","http://localhost:8000").'/'.$path.'/'.$filename;
-            if (!$file->move($destination_path, $filename)) {
-                return $this->errorInternal('Cannot upload file');
-            }
-
+            $full_path = $path . '/' . $sub;
+    
+            // Build the destination directory path
+            $destination_path = './'. $full_path .'/';
+    
+            // Build the file paths for the different representations of the file
+            $relative_path = $full_path . '/' . $filename;
+            $absolute_path = env("APP_URL", "http://localhost:8000") . '/' . $relative_path;
+    
+            // Move the uploaded file to the destination directory
+            $video->move($destination_path, $filename);
+    
+            // Set multimedia object properties
             $data->file_name = $filename;
             $data->file_size = $file_size;
             $data->original_file_name = $original_file_name;
+            $data->path = $full_path;
             $data->absolute_path = $absolute_path;
             $data->relative_path = $relative_path;
-        }    
-        
+        }
+    
+        // Set remaining multimedia object properties
         $data->title = $request->title;
         $data->description = $request->description;
         $data->status = "Y";
         $data->save();
-
-        $result=array(
-                "data_post"=>array(
-                "status"=>TRUE,
+    
+        // Return success response
+        $result = [
+            "data_post" => [
+                "status" => true,
                 "class" => "success",
-                "message"=> __('main.data_added_succesfully')
-            )
-        );
-        echo json_encode($result);
+                "message" => __('main.data_added_succesfully'),
+            ],
+        ];
+        return json_encode($result);
     }
 
     public function update(Request $request){
         if (!Auth::user()->can($this->controller.'-edit')){
             return  json_encode("error_403");
         }
-
+        
         MultimediaController::_validate_data($request);
-
+        
         $res = Multimedia::find($request->id);
         if (!$res) {
-            return $this->errorNotFound("record not found");
+            return  json_encode("record not found");
         }
+
+        // Handle file upload
         if ($request->file('file')) {
             if(!File::exists(public_path($res->relative_path))){
-                return $this->errorNotFound("file not found");
+                return  json_encode("file not found");
             }
             File::delete(public_path($res->relative_path));
 
-            $file = $request->file('file');
-            $original_file_name = $file->getClientOriginalName();
-            $file_ext = $file->getClientOriginalExtension();
-            $file_size = $file->getSize();
-            $filename = 'P-'.time().'-'.Str::random(10) . '.' . $file_ext;
-            
-            $path = env("ROOT_PATH", "multimedia");
-            $destination_path = './'. $path .'/';
-            $relative_path = $path.'/'.$filename;
-            $absolute_path = env("APP_URL","http://localhost:8000").'/'.$path.'/'.$filename;
-            if (!$file->move($destination_path, $filename)) {
-                return $this->errorInternal('Cannot upload file');
-            }
-
+            $video = $request->file('file');
+            $original_file_name = $video->getClientOriginalName();
+            $file_ext = $video->getClientOriginalExtension();
+            $file_size = $video->getSize();
+            $filename = 'P-' . time() . '-' . Str::random(10) . '.' . $file_ext;
+    
+            // Build the full path to the directory where the file will be stored
+            $full_path = $res->path;
+    
+            // Build the destination directory path
+            $destination_path = './'. $full_path .'/';
+    
+            // Build the file paths for the different representations of the file
+            $relative_path = $full_path . '/' . $filename;
+            $absolute_path = env("APP_URL", "http://localhost:8000") . '/' . $relative_path;
+    
+            // Move the uploaded file to the destination directory
+            $video->move($destination_path, $filename);
+    
+            // Set multimedia object properties
             $res->file_name = $filename;
             $res->file_size = $file_size;
             $res->original_file_name = $original_file_name;
             $res->absolute_path = $absolute_path;
             $res->relative_path = $relative_path;
-        }    
+        }
 
         $res->title = $request->title;
         $res->description = $request->description;

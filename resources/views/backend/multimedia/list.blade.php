@@ -131,16 +131,17 @@
                                             <span class="custom-control-label"></span>
                                         </label>
                                     </td>
-                                    <td>No.</th>
-                                    <td>{{__('main.title')}}</td>
-                                    <td>{{__('main.description')}}</td>
+                                    <td width="5%"></td>
+                                    <td width="30%">{{__('main.title')}}</td>
+                                    <td width="50%">{{__('main.description')}}</td>
+                                    <td width="8%">{{__('main.size')}}</td>
                                     <td>{{__('main.status')}}</td>
-                                    <td>{{__('main.action')}}</td>
+                                    <td width="8%">{{__('main.action')}}</td>
                                 </tr>
                             </thead>
                             <tbody>
                             @if ($rows->isEmpty())
-                                <td colspan="6" class="text-center alert-danger">{{__('main.data_empty')}}</td>
+                                <td colspan="7" class="text-center alert-danger">{{__('main.data_empty')}}</td>
                             @else
                                 <?php $no = ($rows->currentPage() - 1) * $rows->perPage(); ?>
                                 @foreach ($rows as $key => $value)
@@ -152,16 +153,23 @@
                                                 <span class="custom-control-label"></span>
                                             </label>
                                         </td>
-                                        <td width="10">{!! $no !!}
-                                        </td>
-                                        <td>{{$value->title}}</td>
-                                        <td>{{$value->description}}</td>
                                         <td>
-                                        <div class="switch">
-                                            <label>
-                                                <input onclick="status_change(this.checked, `{{$value->id}}`)" name="status_change" type="checkbox"{{$value->status == 'Y' ? "checked" : "" }}><span class="lever switch-col-blue" value="Y"></span>
-                                            </label>
-                                        </div>
+                                            <a href="{{$value->absolute_path}}">
+                                                <img class="d-flex mr-3" 
+                                                    src="{{URL::asset('images/play-image.png')}}" width="60" 
+                                                    alt="{{$value->original_file_name}}"
+                                                >
+                                            </a>
+                                        </td>
+                                        <td>{{$value->title}} <small>({{$value->original_file_name}})</small></td>
+                                        <td>{{$value->description}}</td>
+                                        <td>{{$value->file_size}}</td>
+                                        <td>
+                                            <div class="switch">
+                                                <label>
+                                                    <input onclick="status_change(this.checked, `{{$value->id}}`)" name="status_change" type="checkbox"{{$value->status == 'Y' ? "checked" : "" }}><span class="lever switch-col-blue" value="Y"></span>
+                                                </label>
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="hidden-sm hidden-sm action-buttons center">
@@ -234,7 +242,7 @@
                                        <label class="control-label col-md-5">{{ __('main.upload_file') }}</label>
                                         <div class="col-md-9">
                                              <input type="file" name="file" class="dropify" data-max-file-size="10M" />
-                                             <p id="file"></p>
+                                             <div class="mt-3 text-info" id="file"></div>
                                              <small class="form-control-feedback"></small>
                                         </div>
                                     </div>
@@ -410,13 +418,14 @@
                     $('[name="id"]').val(result.data_multimedia.id);
                     $('[name="title"]').val(result.data_multimedia.title);
                     $('[name="description"]').val(result.data_multimedia.description);
+                    
                     var status =result.data_multimedia.status;
                     if(status == 'Y'){
                         $('#status').find(':radio[name=status][value="Y"]').prop('checked', true);
                     }else{
                         $('#status').find(':radio[name=status][value="N"]').prop('checked', true);
                     }
-                    $("#file").text(result.data_multimedia.absolute_path);
+                    $("#file").html('<a href="'+ result.data_multimedia.absolute_path +'" type="button" class="btn waves-effect waves-light btn-sm btn-info">'+ result.data_multimedia.original_file_name +'</a>');
                     
                     $('#modal_form').modal('show');
                     $('.modal-title').text('{{ __("main.edit") }} {!! $pages_title !!}');

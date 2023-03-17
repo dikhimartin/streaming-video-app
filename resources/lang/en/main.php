@@ -60,6 +60,7 @@ return [
     'multimedia' => 'Multimedia',
     'title' => 'Title',
     'upload_file' => 'Upload File',
+    'size' => 'Size',
 
     // => SETTING
     // Users
