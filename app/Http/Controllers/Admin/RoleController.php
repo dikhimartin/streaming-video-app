@@ -61,7 +61,7 @@ class RoleController extends Controller
 
         $controller =$this->controller;
         $pages_title =$this->title();
-        $permission = Permission::orderBy('urutan','ASC')->get();
+        $permission = Permission::orderBy('sort','ASC')->get();
         $page_active ="roles";
 
         $arrGroup = [];
@@ -119,7 +119,7 @@ class RoleController extends Controller
         $page_active    = "roles";
         $role = Role::find($id);
         // $permission = Permission::get();
-        $permission = Permission::orderBy('urutan','ASC')->get();
+        $permission = Permission::orderBy('sort','ASC')->get();
         $arrGroup = [];
         foreach ($permission as $row){
             $splices = explode('-', $row->name);

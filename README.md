@@ -1,3 +1,91 @@
+# Streaming Video App -  (Team Assignment 1)
+
+
+
+## Penjelasan
+
+Lorem ipsum dolor sit amet.....
+
+
+
+## Cara menjalankan aplikasi
+
+**Tech Stack :**
+
+- **Server Native :**
+
+  - PHP >= 7.1.3
+
+  - OpenSSL PHP Extension
+
+  - PDO PHP Extension
+
+  - Mbstring PHP Extension
+
+  - Tokenizer PHP Extension
+
+  - XML PHP Extension
+
+  - Ctype PHP Extension
+
+  - JSON PHP Extension
+  - Composer - https://getcomposer.org
+
+- **Server Container :**
+
+  - Docker Engine https://docs.docker.com/engine/install2.
+  - Docker Compose https://docs.docker.com/compose/install
+    
+    
+
+**Proses Instalasi Laravel 5.6 (Server Native) :** 
+
+- Setting Environtment
+
+  ```shell
+  cp .env.example .env 
+  ```
+
+- Install Vendor
+
+  ```shell
+  composer install -vvv
+  ```
+
+- Persiapan
+
+  ```shell
+  php artisan key:generate
+  ```
+
+  ```shell
+  php artisan config:cache
+  ```
+
+- Inisialisasi Database
+
+  ```shell
+  php artisan migrate
+  ```
+
+  ```shell
+  php artisan db:seed
+  ```
+
+- Menjalankan Aplikasi
+
+  ```shell
+  php artisan serve
+  ```
+
+
+
+------
+
+
+
+### Made with Laravel Framework  5.6
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
@@ -7,9 +95,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## PHP | Laravel Framework | 5.6
 
-### Intro
+#### Intro
+
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
@@ -21,28 +109,3 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
-
-
-### Cara Menjalankan
-``` shell
-cp .env.example .env 
-composer install -vvv
-```
-Setelah proses install vendor selesai
-
-```shell
-php artisan key:generate
-```
-
-```shell
-php artisan config:cache
-```
-
-```shell
-php artisan migrate
-```
-```shell
-php artisan serve
-```
-
-
