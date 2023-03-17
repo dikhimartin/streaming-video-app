@@ -167,7 +167,6 @@
             }
         }
     </style>
-        
     </style>
     @yield('vendor_css')
 </head>
@@ -253,7 +252,6 @@
     <!-- Autosize text area  -->
     <script src="{{ URL::asset('admin_assets/js/autosize/autosize.min.js') }}"></script> 
 
-
     <script>
         $(function() {
             autosize($('textarea[data-autosize]'));
@@ -273,12 +271,8 @@
         }
 
         var dt   = new Date();
-        var data = ''+dt.getFullYear()+' &copy; {{ config('app.name', 'Laravel') }} '+ 
-                    '<a href="http://dikhimartin.com/" class="m-link">'+
-                        'Dikhi Martin'+
-                    '</a>';
+        var data = ''+dt.getFullYear()+' &copy; {{ config('app.name', 'Laravel') }} '
         $("#copyright_footer").html(data);
-        
     </script>
 
     <script src="{{ URL::asset('admin_assets/assets/plugins/toast-master/js/jquery.toast.js') }}"></script>
