@@ -49,7 +49,7 @@ Lorem ipsum dolor sit amet.....
 - Install Vendor
 
   ```shell
-  composer install -vvv
+  composer install
   ```
 
 - Persiapan
