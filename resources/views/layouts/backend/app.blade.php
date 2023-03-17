@@ -15,18 +15,10 @@
     <link href="{{ URL::asset('admin_assets/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('admin_assets/assets/plugins/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
 
-    
     <!-- Custom CSS -->
     <link href="{{ URL::asset('admin_assets/css/style.css') }}" rel="stylesheet">
-    <!-- You can change the theme colors from here -->
     <link href="{{ URL::asset('admin_assets/css/colors/blue.css') }}" id="theme" rel="stylesheet">
-    
-    <!--alerts CSS -->
     <link href="{{ URL::asset('admin_assets/assets/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">  
-
-    <!-- loaders -->
-    <link href="{{URL::asset('admin_assets/css/loaders.css')}}" rel="stylesheet" type="text/css"/>
-
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -172,86 +164,37 @@
 </head>
 
 <body class="fix-sidebar fix-header card-no-border">
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    {{-- <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div> --}}
-    <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div id="main-wrapper">
-        <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
         @include('backend.shared.header')
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
         @include('backend.shared.sidebar')
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
         <!-- Page wrapper  -->
-        <!-- ============================================================== -->
         <div class="page-wrapper">
         @yield('content')
-        
-        <!-- ============================================================== -->
         <!-- footer -->
-        <!-- ============================================================== -->
         <footer class="footer" id="copyright_footer">
         </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
         <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
     <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
     <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script src="{{ URL::asset('admin_assets/assets/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ URL::asset('admin_assets/assets/plugins/bootstrap/js/popper.min.js') }}"></script>
-
     <script src="{{ URL::asset('admin_assets/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{ URL::asset('admin_assets/js/jquery.slimscroll.js') }}"></script>
-    <!--Wave Effects -->
     <script src="{{ URL::asset('admin_assets/js/waves.js') }}"></script>
-    <!--Menu sidebar -->
     <script src="{{ URL::asset('admin_assets/js/sidebarmenu.js') }}"></script>
-    <!--stickey kit -->
     <script src="{{ URL::asset('admin_assets/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
     <script src="{{ URL::asset('admin_assets/assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-    <!--Custom JavaScript -->
     <script src="{{ URL::asset('admin_assets/js/custom.min.js') }}"></script>
-    <!-- Sweet-Alert  -->
     <script src="{{ URL::asset('admin_assets/assets/plugins/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ URL::asset('admin_assets/assets/plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
-
-    <!-- Image Preview  -->
     <script type="text/javascript" src="{{ URL::asset('admin_assets/js/html5.image.preview.min.js') }}"></script>
-
-    <!-- Validation  -->
     <script src="{{ URL::asset('admin_assets/js/validation.js') }}"></script>    
-
-
-    <!-- Autosize text area  -->
     <script src="{{ URL::asset('admin_assets/js/autosize/autosize.min.js') }}"></script> 
-
     <script>
         $(function() {
             autosize($('textarea[data-autosize]'));
@@ -274,18 +217,8 @@
         var data = ''+dt.getFullYear()+' &copy; {{ config('app.name', 'Laravel') }} '
         $("#copyright_footer").html(data);
     </script>
-
     <script src="{{ URL::asset('admin_assets/assets/plugins/toast-master/js/jquery.toast.js') }}"></script>
-
-    <!-- ============================================================== -->
-    <!-- Style switcher -->
-    <!-- ============================================================== -->
-    {{-- <script src="{{ URL::asset('admin_assets/assets/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script> --}}
-
-  
-    <!-- This is data table -->
     <script src="{{ URL::asset('admin_assets/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-
 
     <!-- start - This is for export functionality only -->
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
