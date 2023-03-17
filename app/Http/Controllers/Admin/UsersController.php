@@ -39,7 +39,7 @@ class UsersController extends Controller
         $data['dt_level'] = DB::table('roles')->where('roles.id','!=',3)->get();
 
         $permission = DB::table('users')
-        ->select('users.id_users','users.nik','users.name','users.email','users.gender','users.id_level_user')
+        ->select('users.id_users','users.username','users.name','users.email','users.gender','users.id_level_user')
         ->where('users.id_level_user',$id_level_user)
         ->where('users.status','Y')
         ->first();
@@ -52,7 +52,7 @@ class UsersController extends Controller
         $id_level_user = Auth::user()->id_level_user;
 
         $permission = DB::table('users')
-        ->select('users.id_users','users.nik','users.name','users.email','users.gender','users.id_level_user')
+        ->select('users.id_users','users.username','users.name','users.email','users.gender','users.id_level_user')
         ->where('users.id_level_user',$id_level_user)
         ->where('users.status','Y')
         ->first();
@@ -60,21 +60,21 @@ class UsersController extends Controller
         if($permission->id_level_user == 3){
 
             $user = DB::table('users')
-            ->select('users.id_users','users.nik','users.name','roles.display_name','roles.description','users.email','users.gender','role_user.role_id')
+            ->select('users.id_users','users.username','users.name','roles.display_name','roles.description','users.email','users.gender','role_user.role_id')
             ->leftjoin('role_user', 'users.id_users', '=', 'role_user.user_id')
             ->where('users.status','Y')
             ->leftjoin('roles', 'role_user.role_id', '=', 'roles.id');
         } elseif ($permission->id_level_user == 1) {
 
             $user = DB::table('users')
-            ->select('users.id_users','users.nik','users.name','roles.display_name','roles.description','users.email','users.gender','role_user.role_id')
+            ->select('users.id_users','users.username','users.name','roles.display_name','roles.description','users.email','users.gender','role_user.role_id')
             ->leftjoin('role_user', 'users.id_users', '=', 'role_user.user_id')
             ->where('users.id_level_user','!=',3)
             ->where('users.status','Y')
             ->leftjoin('roles', 'role_user.role_id', '=', 'roles.id');
         }else{
             $user = DB::table('users')
-            ->select('users.id_users','users.nik','users.name','roles.display_name','roles.description','users.email','users.gender','role_user.role_id')
+            ->select('users.id_users','users.username','users.name','roles.display_name','roles.description','users.email','users.gender','role_user.role_id')
             ->leftjoin('role_user', 'users.id_users', '=', 'role_user.user_id')
             ->where('users.status','Y')
             ->leftjoin('roles', 'role_user.role_id', '=', 'roles.id');
@@ -125,9 +125,9 @@ class UsersController extends Controller
         $data['inputerror'] = array();
         $data['status'] = TRUE;
 
-        if($request->nik == '')
+        if($request->username == '')
         {
-            $data['inputerror'][] = 'nik';
+            $data['inputerror'][] = 'username';
             $data['error_string'][] = 'Username is required';
             $data['status'] = FALSE;
         }
@@ -173,12 +173,12 @@ class UsersController extends Controller
         $data['inputerror'] = array();
         $data['status'] = TRUE;
 
-        $check_nik = DB::table('users')->where('nik', $request->nik)->count();
+        $check_username = DB::table('users')->where('username', $request->username)->count();
 
-        if($check_nik >= 1)
+        if($check_username >= 1)
         {
-            $data['inputerror'][] = 'nik';
-            $data['error_string'][] = 'nik Can not be the same';
+            $data['inputerror'][] = 'username';
+            $data['error_string'][] = 'Username Can not be the same';
             $data['status'] = FALSE;
         }
 
@@ -196,7 +196,7 @@ class UsersController extends Controller
 
         $pk = new User;
         $pk->id_users   = $Kode_unik;
-        $pk->nik        = $request->nik;
+        $pk->username   = $request->username;
         $pk->name       = $request->names;
         $pk->email      = $request->email;
         $pk->telephone  = $request->telephone;
@@ -238,7 +238,7 @@ class UsersController extends Controller
         UsersController::_validate_data($request);
 
         $pk = User::find($request->id_users);
-        $pk->nik = $request->nik;
+        $pk->username = $request->username;
         $pk->name = $request->names;
         $pk->email = $request->email;
         $pk->telephone = $request->telephone;
@@ -248,9 +248,7 @@ class UsersController extends Controller
         if(!empty($request->password)){
             $pk->password =bcrypt($request->password);
         }
-
         if ($request->status_image == "0") {
-            // delete_image
            $path_delete = 'images/profile/'.$pk->image;
            $deleted = File::delete($path_delete);
            $pk->image = "";

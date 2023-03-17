@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->char('id_users', 10)->nullable(false);
-            $table->char('nik', 20)->nullable(true);
+            $table->char('username', 20)->nullable(true);
             $table->string('name', 50)->nullable(true);
             $table->string('password', 100)->nullable(true);
             $table->string('email', 100)->nullable(true);
@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->enum('status', ['Y', 'N'])->nullable(true);
             $table->string('additional', 100)->nullable(true);
             $table->primary('id_users');
-            $table->unique('nik');
+            $table->unique('username');
         });
     }
 

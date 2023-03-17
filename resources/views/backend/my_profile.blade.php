@@ -266,8 +266,8 @@
                                     <div class="form-group" id="username">
                                         <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style="margin-bottom: 5px;">{{ __('main.username') }} &nbsp;<span class="required">*</span></label>
                                         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-12">
-                                            <input type="hidden" name="username_old" value="{{$nik}}" autocomplete="off" />
-                                            <input type="text" class="form-control" name="username" value="{{$nik}}" autocomplete="off" />
+                                            <input type="hidden" name="username_old" value="{{$username}}" autocomplete="off" />
+                                            <input type="text" class="form-control" name="username" value="{{$username}}" autocomplete="off" />
                                             <small class='form-control-feedback' id='alert-username'></small>
                                         </div>
                                     </div>

@@ -345,7 +345,7 @@
                                                                             <div class="form-group">
                                                                                <label class="control-label col-md-5">{{ __('main.username') }} &nbsp;<span class="required">*</span></label>
                                                                                 <div class="col-md-9">
-                                                                                    <input type="nik" name="nik" required="" placeholder="{{__('main.username')}}" class="form-control">
+                                                                                    <input type="username" name="username" required="" placeholder="{{__('main.username')}}" class="form-control">
                                                                                      <small class="form-control-feedback"></small>
                                                                                 </div>
                                                                             </div>
@@ -535,7 +535,7 @@
                 {
 
                     $('[name="id_users"]').val(result.data_users.id_users);
-                    $('[name="nik"]').val(result.data_users.nik);
+                    $('[name="username"]').val(result.data_users.username);
                     $('[name="email"]').val(result.data_users.email);
                     $('[name="names"]').val(result.data_users.name);
                     $('[name="telephone"]').val(result.data_users.telephone);

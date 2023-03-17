@@ -29,7 +29,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/admin/dashboard';
 
-    protected $nik = 'nik';
+    protected $username = 'username';
 
     /**
      * Create a new controller instance.
@@ -49,7 +49,7 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'nik';
+        return 'username';
     }
 
     

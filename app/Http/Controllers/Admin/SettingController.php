@@ -25,7 +25,7 @@ class SettingController extends Controller
         $data['page_active'] ="profile";
     	$data['pages_title'] =__('main.profile');
 		$data['id_users'] = Auth::user()->id_users;
-		$data['nik'] = Auth::user()->nik;
+		$data['username'] = Auth::user()->nik;
 		$data['name'] = Auth::user()->name;
 		$data['password'] = Auth::user()->password;
 		$data['email'] = Auth::user()->email;
@@ -38,7 +38,7 @@ class SettingController extends Controller
         $get_roles = DB::table('roles')->select('name')->where('id',Auth::user()->id_level_user)->first();
 
         $data_user = DB::table('users')
-            ->select('users.id_users','users.nik','users.name','users.date_birth','users.address','users.email','users.telephone','users.address')
+            ->select('users.id_users','users.username','users.name','users.date_birth','users.address','users.email','users.telephone','users.address')
             ->where('users.id_users',Auth::user()->id_users)
         ->first();
 
@@ -111,7 +111,7 @@ class SettingController extends Controller
         $id_users       = Auth::user()->id_users;
         $data           = User::find($id_users);
         $data->name     = $request->names;
-        $data->nik      = $request->username;
+        $data->username      = $request->username;
         $data->gender   = $request->gender;
         $data->email    = $request->email;
 
@@ -163,15 +163,15 @@ class SettingController extends Controller
 
         if ($type_check == "1") {
 
-            $check_username = DB::table('users')->select('nik')
-            ->where('nik',$username)
+            $check_username = DB::table('users')->select('username')
+            ->where('username',$username)
             ->first();
 
         }else if ($type_check == "2") {
 
-            $check_username = DB::table('users')->select('nik')
-            ->where('nik', '=' ,$username)
-            ->where('nik', '!=' ,$username_old)
+            $check_username = DB::table('users')->select('username')
+            ->where('username', '=' ,$username)
+            ->where('username', '!=' ,$username_old)
             ->first();
         }
 

@@ -1,9 +1,6 @@
 @extends('layouts.backend.login')
 
 @section('content')
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <section id="wrapper">
         <div class="login-register">
             <div class="login-box card">
@@ -23,7 +20,7 @@
 
                             <div class="form-group" id="username">
                                 <div class="col-xs-12">
-                                    <input class="form-control" type="text"placeholder="Username" name="nik" value="{{ old('nik') }}">
+                                    <input class="form-control" type="text"placeholder="Username" name="username" value="{{ old('username') }}">
                                 </div>
                                 <small class="form-control-feedback" id="alert-username"></small>
                             </div>
@@ -74,7 +71,7 @@
 
                             <div class="form-group m-b-0">
                                 <div class="col-sm-12 text-center">
-                                    <div>{{ __('main.dont_have_an_account') }} <a href="javascript:void(0)" class="text-info m-l-5"><b>{{ __('main.signup') }}</b></a></div>
+                                    <div>{{ __('main.dont_have_an_account') }} <a href="/register" class="text-info m-l-5"><b>{{ __('main.signup') }}</b></a></div>
                                 </div>
                             </div>
                     </form>
@@ -110,14 +107,10 @@
                             </div>
                         </div>
                     </form>
-                     <!-- reset password -->
                 </div>
             </div>
         </div>
     </section>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
 @endsection
 
 <script type="text/javascript">
@@ -128,10 +121,10 @@
         $('.form-control-feedback').text("");
 
         // validasi
-        if (form.nik.value == ""){
+        if (form.username.value == ""){
             $("#username").addClass("form-group has-danger");
             $("#alert-username").text("Please fill in Username");
-            form.nik.focus();
+            form.username.focus();
             return (false);
         }
         if (form.password.value == ""){

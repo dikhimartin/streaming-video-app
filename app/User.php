@@ -19,7 +19,7 @@ class User extends Authenticatable
     public $incrementing = false;
 
     protected $fillable = [
-        'id_users','nik','username', 'password','email','telephone','address','date_birth','gender','id_level_user','id_setting_divisions','status','created_by','update_by','image'
+        'id_users','username','name', 'password','email','telephone','address','date_birth','gender','id_level_user','id_setting_divisions','status','created_by','update_by','image'
     ];
 
     /**

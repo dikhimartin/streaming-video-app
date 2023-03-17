@@ -31,7 +31,7 @@ class HomeController extends Controller
       $page_active='dashboard';
 
       $data_user = DB::table('users')
-        ->select('users.nik','users.name','users.id_level_user','roles.display_name')
+        ->select('users.username','users.name','users.id_level_user','roles.display_name')
         ->leftjoin('roles','users.id_level_user','=','roles.id')
         ->where('users.id_users',Auth::user()->id_users)
       ->first();
