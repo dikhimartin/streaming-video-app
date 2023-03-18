@@ -55,6 +55,13 @@ return [
     'dont_have_permission_to_access_on_this_server' => "ANDA TIDAK MEMILIKI IZIN UNTUK MENGAKSES PADA SERVER INI.",
     'back_to_home' => 'Kembali ke Halaman Utama',
 
+    // => MULTIMEDIA
+    'multimedia' => 'Multimedia',
+    'title' => 'Judul',
+    'upload_file' => 'Unggah File',
+    'size' => 'Ukuran',
+    'file_name' => 'Nama File',
+
     // => SETTING
     // Users
     'users' => 'Pengguna',
