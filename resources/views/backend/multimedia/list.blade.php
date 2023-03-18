@@ -154,11 +154,10 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <a href="{{$value->absolute_path}}">
-                                                <img class="d-flex mr-3" 
-                                                    src="{{URL::asset('images/play-image.png')}}" width="60" 
-                                                    alt="{{$value->original_file_name}}"
-                                                >
+                                            <a href="javascript:void(0)" onClick="showVideoPopup('{{$value->absolute_path}}')">
+                                                <img class="d-flex mr-3 bounce img-responsive radius" 
+                                                    src="{{URL::asset('images/play-image.png')}}" width="70" 
+                                                    alt="{{$value->original_file_name}}">
                                             </a>
                                         </td>
                                         <td>{{$value->title}} <small>({{$value->original_file_name}})</small></td>
@@ -621,6 +620,16 @@
                             swal("{{ __('main.cancelled') }}", "{{ __('main.cancelled_detail') }}", "error");
                         } 
                      })
+        }
+
+        function showVideoPopup(url) {
+            // Calculate the width and height of the video player
+            var width = window.innerWidth * 0.8;
+            var height = width * 0.56; // Assuming a 16:9 aspect ratio for the video
+
+            // Create a new window with the video player
+            var playerWindow = window.open('', 'Video Player', 'width=' + width + ',height=' + height);
+            playerWindow.document.write('<video src="' + url + '" controls autoplay style="width:100%;height:auto;"></video>');
         }
 
     </script>

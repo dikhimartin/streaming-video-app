@@ -8167,3 +8167,20 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     background-color: rgba(255, 255, 255, 0.5); }
     .switch label input[type=checkbox]:checked + .lever.switch-col-white:after {
       background-color: #ffffff; }
+
+
+    .bounce {
+        /* Set the initial state of the image */
+        transform: translateY(0);
+    }
+
+    /* Apply the "bounce" class to the image on hover */
+    .bounce:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+    }
+
+    /* Apply the "bounce" class to the image on mouseout */
+    .bounce:not(:hover) {
+        transform: translateY(0);
+    }
