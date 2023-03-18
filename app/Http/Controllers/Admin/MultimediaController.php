@@ -34,6 +34,7 @@ class MultimediaController extends Controller
             return view('backend.errors.401')->with(['url' => '/admin']);
         }
 
+
         // Filter Data
         $field_filter       = $request->get('field_filter');
         $operator_filter    = $request->get('operator_filter');
@@ -54,31 +55,33 @@ class MultimediaController extends Controller
         return view('backend.'.$this->controller.'.list', compact('rows'))->with(array('controller' => $this->controller, 'pages_title' => $this->title(), 'text_filter' => $text_filter , 'operator_filter' => $operator_filter, 'field_filter' => $field_filter));
     }
 
-    private function _validate_data(Request $request){
-
+    private function _validate_data(Request $request, $source){
         $data = array();
         $data['error_string'] = array();
         $data['inputerror'] = array();
         $data['status'] = TRUE;
 
-        if($request->title == '')
-        {
+        if($request->title == ''){
             $data['inputerror'][] = 'title';
             $data['error_string'][] = 'Title is required';
             $data['status'] = FALSE;
         }
-        if ($request->file('file')) {
-            $fileSize = $request->file('file')->getSize();
-            $maxFileSize = env("UPLOAD_MAX_FILESIZE", 2048); // Maximum file size in kilobytes
-            if ($fileSize > $maxFileSize * 1024) {
+        if ($source == 'save') {
+            if (!$request->hasFile('file')) {
                 $data['inputerror'][] = 'file';
-                $data['error_string'][] = 'The file size must not exceed ' . $maxFileSize . ' KB';
+                $data['error_string'][] = 'File is required';
                 $data['status'] = FALSE;
+            }else{
+                $fileSize = $request->file('file')->getSize();
+                $maxFileSize = config('app.upload_max_size', 2048); // Maximum file size in kilobytes
+                if ($fileSize > $maxFileSize * 1024) {
+                    $data['inputerror'][] = 'file';
+                    $data['error_string'][] = 'The file size must not exceed ' . $maxFileSize . ' KB';
+                    $data['status'] = FALSE;
+                }
             }
         }
-
-        if($data['status'] === FALSE)
-        {
+        if($data['status'] === FALSE){
             echo json_encode($data);
             exit();
         }
@@ -89,9 +92,9 @@ class MultimediaController extends Controller
         if (!Auth::user()->can($this->controller . '-create')) {
             return json_encode("error_403");
         }
-    
+
         // Validate request data
-        MultimediaController::_validate_data($request);
+        MultimediaController::_validate_data($request, "save");
     
         // Create a new multimedia object
         $data = new Multimedia();
@@ -152,7 +155,7 @@ class MultimediaController extends Controller
             return  json_encode("error_403");
         }
         
-        MultimediaController::_validate_data($request);
+        MultimediaController::_validate_data($request, "update");
         
         $res = Multimedia::find($request->id);
         if (!$res) {

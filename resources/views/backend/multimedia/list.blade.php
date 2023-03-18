@@ -1,3 +1,16 @@
+<?php
+    $upload_size = config('app.upload_max_size');
+    if (!empty($upload_size)) {
+        $upload_size = $upload_size / 1024;
+        $upload_size = round($upload_size, 2); // Round to 2 decimal places
+    } else {
+        // Default to 2048 kilobytes (2 megabytes)
+        $upload_size = 2048;
+    }
+    $max_upload_size = $upload_size . " MB";
+    $dropify_max_upload_size = $upload_size . "M";
+?>
+
 @extends('layouts.backend.app')
 @section('sidebarActive', $controller)
 
@@ -89,7 +102,8 @@
                 <div class="alert alert-info">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
                     <h3 class="text-info"><i class="fa fa-exclamation-circle"></i> Information</h3> 
-                    {{__('main.upload_max_file_size_alert')}} {{ config('app.upload_max_size', '2 Megabyte') }}
+                    {{__('main.upload_max_file_size_alert')}} {{ $max_upload_size }}
+                    
                 </div>
             </div>
 
@@ -246,8 +260,8 @@
                                     <div class="form-group">
                                        <label class="control-label col-md-5">{{ __('main.title') }} <span class="required">*</span></label>
                                         <div class="col-md-9">
-                                            <input type="title" name="title" required="" placeholder="{{__('main.title')}}" class="form-control">
-                                             <small class="form-control-feedback"></small>
+                                            <input type="title" name="title" placeholder="{{__('main.title')}}" class="form-control">
+                                            <small class="form-control-feedback"></small>
                                         </div>
                                     </div>
                                     
@@ -255,7 +269,7 @@
                                     <div class="form-group">
                                        <label class="control-label col-md-5">{{ __('main.upload_file') }}</label>
                                         <div class="col-md-9">
-                                             <input type="file" name="file" class="dropify" data-allowed-file-extensions='["mp4", "avi", "mov", "wmv", "mkv"]'  data-max-file-size="10M" />
+                                             <input type="file" name="file" class="dropify" data-allowed-file-extensions='["mp4", "avi", "mov", "wmv", "mkv"]'  data-max-file-size="{{ $dropify_max_upload_size }}" />
                                              <div class="mt-3 text-info" id="file"></div>
                                              <small class="form-control-feedback"></small>
                                         </div>
@@ -455,7 +469,6 @@
             $('#btnSave').text('{{__('main.saving')}}...'); //change button text
             $('#btnSave').attr('disabled',true); //set button disable
             var url;
-
             if(save_method == 'add') {
                 url ="{{url('admin/multimedia/save')}}";
                 $('#btnSave').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Saving ...'); //change button text
@@ -463,6 +476,7 @@
                 url ="{{url('admin/multimedia/update')}}";
                 $('#btnSave').html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Updated ...'); //change button text
             }
+
             // ajax adding data to database
             var formData = new FormData($('#form_group_multimedia')[0]);
 
@@ -473,39 +487,31 @@
                 contentType: false,
                 processData: false,
                 dataType: "JSON",
-                success: function(data)
-                {
-                    if(data.data_post) //if success close modal and reload ajax table
-                        {
-                            $('.loading').show("fast");
-                            $('#modal_form').modal('hide');
-                            $("#notif_success").animate({
-                                    left: "+=50",
-                                    height: "toggle"
-                                }, 100, function() {
-                                });
+                success: function(data) {
+                    if(data.data_post){
+                        $('.loading').show("fast");
+                        $('#modal_form').modal('hide');
+                        $("#notif_success").animate({
+                                left: "+=50",
+                                height: "toggle"
+                            }, 100, function() {
+                            });
 
-                             document.getElementById("notif_success").innerHTML ="<div class='alert alert-"+data.data_post['class']+"'>"+ data.data_post['message']+ "</div>";
-
-                            setTimeout(function() {
-                                    $('#notif_success').hide();
-                                }, 1500);
-                            location.reload();
+                            document.getElementById("notif_success").innerHTML ="<div class='alert alert-"+data.data_post['class']+"'>"+ data.data_post['message']+ "</div>";
+                        setTimeout(function() {
+                                $('#notif_success').hide();
+                            }, 1500);
+                        location.reload();
+                    }else{
+                        for (var i = 0; i < data.inputerror.length; i++){
+                            $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-danger'); //select parent twice to select div form-group class and add has-danger class
+                            $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
                         }
-                    else
-                    {
-                            for (var i = 0; i < data.inputerror.length; i++)
-                            {
-                                $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-danger'); //select parent twice to select div form-group class and add has-danger class
-                                $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
-                            }
                     }
                     $('#btnSave').text('{{__('main.save')}}'); //change button text
                     $('#btnSave').attr('disabled',false); //set button enable
                 },
-                error: function (data)
-                {
-                    // console.log(data);
+                error: function (data){
                     alert('Error adding data');
                     $('#btnSave').text('{{__('main.save')}}'); //change button text
                     $('#btnSave').attr('disabled',false); //set button enable
@@ -645,6 +651,26 @@
             // Create a new window with the video player
             var playerWindow = window.open('', 'Video Player', 'width=' + width + ',height=' + height);
             playerWindow.document.write('<video src="' + url + '" controls autoplay style="width:100%;height:auto;"></video>');
+        }
+
+        function parseSize(size) {
+            var units = {
+                B: 1,
+                KB: 1024,
+                MB: 1024 * 1024,
+                GB: 1024 * 1024 * 1024,
+                TB: 1024 * 1024 * 1024 * 1024
+            };
+            var matches = size.match(/^(\d+(?:\.\d+)?)\s*(\w+)$/);
+            if (!matches) {
+                return NaN;
+            }
+            var value = parseFloat(matches[1]);
+            var unit = matches[2].toUpperCase();
+            if (!(unit in units)) {
+                return NaN;
+            }
+            return value * units[unit];
         }
 
     </script>
