@@ -48,7 +48,7 @@ class MultimediaController extends Controller
             $datas->where('multimedia.'.$field_filter.'', '=', "".$text_filter."");      
         }
 
-        $datas->orderBy('id','DESC');
+        $datas->orderBy('created_at','DESC');
         $rows = $datas->paginate(10);
 
         return view('backend.'.$this->controller.'.list', compact('rows'))->with(array('controller' => $this->controller, 'pages_title' => $this->title(), 'text_filter' => $text_filter , 'operator_filter' => $operator_filter, 'field_filter' => $field_filter));

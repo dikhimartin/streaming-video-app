@@ -62,6 +62,7 @@ return [
     'upload_file' => 'Upload File',
     'size' => 'Size',
     'file_name' => 'File Name',
+    'upload_max_file_size_alert' => 'File size cannot exceed than',
 
     // => SETTING
     // Users

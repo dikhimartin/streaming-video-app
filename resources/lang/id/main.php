@@ -61,6 +61,8 @@ return [
     'upload_file' => 'Unggah File',
     'size' => 'Ukuran',
     'file_name' => 'Nama File',
+    'upload_max_file_size_alert' => 'Ukuran file tidak boleh melebihi dari',
+
 
     // => SETTING
     // Users

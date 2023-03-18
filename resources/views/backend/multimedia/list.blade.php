@@ -84,6 +84,16 @@
                 </div>
             </div>
 
+            <!-- info -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="alert alert-info">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    <h3 class="text-info"><i class="fa fa-exclamation-circle"></i> Information</h3> 
+                    {{__('main.upload_max_file_size_alert')}} {{ config('app.upload_max_size', '2 Megabyte') }}
+                </div>
+            </div>
+
+
             <!-- Data -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card-header bg-info text-white">
@@ -92,7 +102,6 @@
                     {{__('main.list_data')}}
                 </div>
                 <div class="card">
-
                     <p style="margin-bottom: 20px;"></p>
                     <div class="card-body">
                     <div class="row">
@@ -162,7 +171,13 @@
                                         </td>
                                         <td>{{$value->title}} <small>({{$value->original_file_name}})</small></td>
                                         <td>{{$value->description}}</td>
-                                        <td>{{$value->file_size}}</td>
+                                        <td class="text-info"> 
+                                            @if ($value->file_size >= 1024 * 1024)
+                                                {{ round($value->file_size / 1024 / 1024, 2) }} MB
+                                            @else
+                                                {{ round($value->file_size / 1024, 2) }} KB
+                                            @endif
+                                        </td>
                                         <td>
                                             <div class="switch">
                                                 <label>
@@ -240,7 +255,7 @@
                                     <div class="form-group">
                                        <label class="control-label col-md-5">{{ __('main.upload_file') }}</label>
                                         <div class="col-md-9">
-                                             <input type="file" name="file" class="dropify" data-max-file-size="10M" />
+                                             <input type="file" name="file" class="dropify" data-allowed-file-extensions='["mp4", "avi", "mov", "wmv", "mkv"]'  data-max-file-size="10M" />
                                              <div class="mt-3 text-info" id="file"></div>
                                              <small class="form-control-feedback"></small>
                                         </div>
