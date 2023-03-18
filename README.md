@@ -10,7 +10,29 @@ Demo : [https://streamingapp.dikhimartin.tech](https://streamingapp.dikhimartin.
 
 ## Penjelasan
 
-Lorem ipsum dolor sit amet.....
+Kami membuat project ini, karena untuk melengkapi satu tugas kelompok di Universitas. Jadi kita diminta untuk membuat suatu website CMS dengan kriteria sebagai berikut :
+
+```
+Buatlah aplikasi video streaming menggunakan laravel. Berikut aturannya:
+a.	Inputan:
+    •	Text Nama File 
+    •	Menu upload video.
+b.	Menampilkan tampilan list file yang sudah diupload
+c.	Jika list pada file video tersebut di klik maka akan play video streaming yang dipilih.
+d.	User dapat mengedit nama file atau upload video ulang. 
+e.	User dapat menghapus nama file dan video yang telah diupload.
+
+Tech Stack Requirement : 
+- Laravel Framework >= 5.6 
+
+source : 20220629154936_TK1-W3-S4-R1
+```
+
+
+
+Dari kriteria tersebut dapat di definisikan beberapa menu yang ada dalam website, antara lain :
+
+![](https://raw.githubusercontent.com/dikhimartin/streaming-video-app/main/public/images/admin-page.png)
 
 
 
