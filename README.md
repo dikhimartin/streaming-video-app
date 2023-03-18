@@ -14,13 +14,13 @@ Kami membuat project ini, karena untuk melengkapi satu tugas kelompok di Univers
 
 ```
 Buatlah aplikasi video streaming menggunakan laravel. Berikut aturannya:
-a.	Inputan:
-    •	Text Nama File 
-    •	Menu upload video.
-b.	Menampilkan tampilan list file yang sudah diupload
-c.	Jika list pada file video tersebut di klik maka akan play video streaming yang dipilih.
-d.	User dapat mengedit nama file atau upload video ulang. 
-e.	User dapat menghapus nama file dan video yang telah diupload.
+a. Inputan:
+    • Text Nama File
+    • Menu upload video
+b. Menampilkan tampilan list file yang sudah diupload
+c. Jika list pada file video tersebut di klik maka akan play video streaming yang dipilih.
+d. User dapat mengedit nama file atau upload video ulang. 
+e. User dapat menghapus nama file dan video yang telah diupload.
 
 Tech Stack Requirement : 
 - Laravel Framework >= 5.6 
