@@ -1,8 +1,8 @@
-[![Bina Drive Logo](https://raw.githubusercontent.com/dikhimartin/streaming-video-app/main/public/admin_assets/assets/images/logo-full.png)](https://streamingapp.dikhimartin.tech/)
+[![Streaming Apps Logo](https://raw.githubusercontent.com/dikhimartin/streaming-video-app/main/public/admin_assets/assets/images/logo-full.png)](https://streamingapp.binusassignment.tech)
 
 
 
-Demo : [https://streamingapp.dikhimartin.tech](https://streamingapp.dikhimartin.tech/)
+Demo : [https://streamingapp.binusassignment.tech](https://streamingapp.binusassignment.tech/)
 
 # Streaming Video App -  (Team Assignment 1)
 
