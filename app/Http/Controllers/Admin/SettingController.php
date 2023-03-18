@@ -111,7 +111,7 @@ class SettingController extends Controller
         $id_users       = Auth::user()->id_users;
         $data           = User::find($id_users);
         $data->name     = $request->names;
-        $data->username      = $request->username;
+        $data->username = $request->username;
         $data->gender   = $request->gender;
         $data->email    = $request->email;
 

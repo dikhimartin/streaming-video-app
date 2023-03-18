@@ -184,7 +184,7 @@ class MultimediaController extends Controller
     
             // Build the file paths for the different representations of the file
             $relative_path = $full_path . '/' . $filename;
-            $absolute_path = env("APP_URL", "http://localhost:8000") . '/' . $relative_path;
+            $absolute_path = config('app.url') . '/' . $relative_path;
     
             // Move the uploaded file to the destination directory
             $video->move($destination_path, $filename);
