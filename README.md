@@ -1,3 +1,9 @@
+[![Bina Drive Logo](https://raw.githubusercontent.com/dikhimartin/streaming-video-app/main/public/admin_assets/assets/images/logo-full.png)](https://streamingapp.dikhimartin.tech/)
+
+
+
+Demo : [https://streamingapp.dikhimartin.tech](https://streamingapp.dikhimartin.tech/)
+
 # Streaming Video App -  (Team Assignment 1)
 
 
@@ -34,8 +40,9 @@ Lorem ipsum dolor sit amet.....
 - **Server Container :**
 
   - Docker Engine https://docs.docker.com/engine/install2.
+
   - Docker Compose https://docs.docker.com/compose/install
-    
+
     
 
 **Proses Instalasi Laravel 5.6 (Server Native) :** 
@@ -87,7 +94,9 @@ Lorem ipsum dolor sit amet.....
   ```
 
 - Laravel development server started: <http://127.0.0.1:8000>
+
 - Akses Login 
+
   - Username : superadmin
   - Password  : superadmin
 
@@ -105,6 +114,7 @@ Lorem ipsum dolor sit amet.....
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
+
 
 
 #### Intro
