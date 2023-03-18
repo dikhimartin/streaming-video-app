@@ -34,6 +34,11 @@ Dari kriteria tersebut dapat di definisikan beberapa menu yang ada dalam website
 
 ![](https://raw.githubusercontent.com/dikhimartin/streaming-video-app/main/public/images/admin-page.png)
 
+- **Dashboard**
+- **Multimedia**
+- **Pengaturan**
+  - **Akses Pengguna**
+
 
 
 ## Cara menjalankan aplikasi
