@@ -32,6 +32,15 @@
                                 <small class="form-control-feedback" id="alert-password"></small>
                             </div>
 
+                            @if (config('app.env') == 'production')
+                            <div class="form-group {{ $errors->has('g-recaptcha-response') ? ' has-danger' : '' }}">
+                                <div class="input-group">
+                                    {!! NoCaptcha::renderJs() !!}
+                                    {!! NoCaptcha::display() !!}
+                                </div>
+                            </div>
+                            @endif
+                            
                             @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     @foreach ($errors->all() as $error)

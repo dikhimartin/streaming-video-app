@@ -177,7 +177,6 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         //entrust
@@ -187,7 +186,6 @@ return [
         // Mcmara translation
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         PeterColes\Countries\CountriesServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
